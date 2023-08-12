@@ -21,8 +21,12 @@ interface NotesDao {
     @Query("SELECT * FROM Notes_Table")
     fun getAllNotes() : List<Notes>
 
-    @Query("SELECT * FROM Notes_Table WHERE id=:id")
-    fun getNote(id : Int) : Notes
+    @Query("SELECT * FROM Notes_Table WHERE title Like :title ")
+    fun getNote(title : String) : List<Notes>
+
+    @Query("DELETE FROM NOTES_TABLE")
+    fun clear()
+
 
 
 }
