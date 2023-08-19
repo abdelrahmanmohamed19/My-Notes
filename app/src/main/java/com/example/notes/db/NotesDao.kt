@@ -5,27 +5,29 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Dao
 interface NotesDao {
 
     @Insert
-    fun addNote(note : Notes)
+    suspend fun addNote(note : Notes)
 
     @Delete
-    fun deleteNote(note: Notes)
+    suspend fun deleteNote(note: Notes)
 
     @Update
-    fun updateNote(notes: Notes)
+    suspend fun updateNote(notes: Notes)
 
     @Query("SELECT * FROM Notes_Table")
-    fun getAllNotes() : List<Notes>
+    fun getAllNotes() : Flow<List<Notes>>
 
     @Query("SELECT * FROM Notes_Table WHERE title Like :title ")
-    fun getNote(title : String) : List<Notes>
+    suspend fun getNote(title : String) : List<Notes>
 
     @Query("DELETE FROM NOTES_TABLE")
-    fun clear()
+    suspend fun clear()
 
 
 

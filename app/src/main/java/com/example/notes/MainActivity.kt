@@ -22,9 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +38,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,9 +58,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.notes.db.Notes
-import com.example.notes.ui.theme.MainViewModel
 import com.example.notes.ui.theme.NotesTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -113,6 +112,7 @@ fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
     var search by remember { mutableStateOf(TextFieldValue()) }
     var list by remember{ mutableStateOf(emptyList<Notes>()) }
     val colors = listOf(R.color.first,R.color.second,R.color.third,R.color.fourth,R.color.fifth,R.color.sixth)
+    val scope = rememberCoroutineScope()
     Scaffold(floatingActionButton = { FloatingButton(navController = navController)},topBar = { AppTobBar(viewModel)}) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
@@ -132,12 +132,17 @@ fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
 
         LazyVerticalGrid(columns = GridCells.Fixed(2)){
 
-            if (search.text.isEmpty()){
-              list = viewModel.getAllNotes().value
+            if (search.text.isEmpty()) {
+               list = viewModel.listMain.value
             }
-            else if (search.text.isNotEmpty()) {
-                list = viewModel.getNote(search.text).value
 
+            else if (search.text.isNotEmpty()) {
+
+                scope.launch {
+
+                    list = viewModel.getNote(search.text).value
+
+                }
             }
             itemsIndexed(list) {index ,item ->
                 val color = colors[index % colors.size]
@@ -170,12 +175,15 @@ fun FloatingButton(navController: NavHostController){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTobBar(viewModel: MainViewModel) {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
     TopAppBar(title = { Text(text = "Notes", fontSize = 25.sp, color = Color.White, fontWeight = FontWeight.Bold) },colors = TopAppBarDefaults.smallTopAppBarColors(colorResource(id = R.color.main)),
         actions = {
-            IconButton(onClick = { viewModel.clear()
-            viewModel.getAllNotes()
-            Toast.makeText(context,"your notes list is cleared",Toast.LENGTH_SHORT).show()}) {
+            IconButton(onClick = {
+                scope.launch {
+                    viewModel.clear()
+                    Toast.makeText(context,"your notes list is cleared",Toast.LENGTH_SHORT).show()
+                } }) {
                 Icon(imageVector = Icons.Filled.Delete, contentDescription = "")
             }
         })
@@ -190,6 +198,7 @@ fun DetailsScreen(
     noteContent: String,
     viewModel: MainViewModel
 ) {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
@@ -221,18 +230,25 @@ fun DetailsScreen(
         Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
             Button(onClick = {
                 if (title.isNotEmpty() && content.isNotEmpty()){
-                    viewModel.updateNote(Notes(id = id ,title = title , content = content))
-                    Toast.makeText(context, "your Note is Updated", Toast.LENGTH_SHORT).show()
-                    navController.navigate("home")
+                    scope.launch {
+                        viewModel.updateNote(Notes(id = id ,title = title , content = content))
+                        Toast.makeText(context, "your Note is Updated", Toast.LENGTH_SHORT).show()
+                        navController.navigate("home")
+                    }
+
                 }
                 else {Toast.makeText(context,"Title or Content is empty",Toast.LENGTH_SHORT).show()}
             }, modifier = Modifier
                 .padding(top = 8.dp , bottom = 8.dp), colors = ButtonDefaults.buttonColors(Color.DarkGray)) {
                 Text(text = "Update", fontSize = 20.sp,fontWeight = FontWeight.Bold, color = Color.White)
             }
-            Button(onClick = {viewModel.deleteNote(Notes(id = id ,title = title , content = content))
-                Toast.makeText(context, "your Note is Deleted", Toast.LENGTH_SHORT).show()
-                navController.navigate("home")
+            Button(onClick = {
+                scope.launch {
+                    viewModel.deleteNote(Notes(id = id ,title = title , content = content))
+                    Toast.makeText(context, "your Note is Deleted", Toast.LENGTH_SHORT).show()
+                    navController.navigate("home")
+                }
+
             }, modifier = Modifier
                 .padding(top = 8.dp , bottom = 8.dp, start = 12.dp), colors = ButtonDefaults.buttonColors(Color.DarkGray)) {
                 Text(text = "Delete", fontSize = 20.sp,fontWeight = FontWeight.Bold, color = Color.White)
@@ -245,6 +261,7 @@ fun DetailsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNotesScreen(navController: NavHostController, viewModel: MainViewModel) {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
@@ -275,9 +292,12 @@ fun AddNotesScreen(navController: NavHostController, viewModel: MainViewModel) {
                 ))
             Button(onClick = {
                 if(title.text.isNotEmpty() && content.text.isNotEmpty()){
-                    viewModel.insertNote(Notes(title = title.text , content = content.text))
-                    Toast.makeText(context, "your Note is Added", Toast.LENGTH_SHORT).show()
-                    navController.navigate("home") }
+                    scope.launch {
+                        viewModel.insertNote(Notes(title = title.text , content = content.text))
+                        Toast.makeText(context, "your Note is Added", Toast.LENGTH_SHORT).show()
+                        navController.navigate("home") }
+                    }
+
                 else {Toast.makeText(context,"Title or Content is empty",Toast.LENGTH_SHORT).show()}},
                 modifier = Modifier
                     .fillMaxWidth()
