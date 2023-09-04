@@ -2,9 +2,7 @@
 
 ## $\color{#3498db}{About}$
 
-The currency conversion app aims to provide users with real-time and accurate currency
-conversion rates. It will support a wide range of currencies and offer a user-friendly interface.
-The app will be developed for multiple platforms, including web, Android ,and iOS.
+Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience."
 
 
 ## $\color{#e74c3c}{Features}$
