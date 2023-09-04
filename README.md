@@ -1,11 +1,11 @@
 # Notes - Android App <img height="40" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" />
 
-## $\color{red}{🚀 About}$
+## $\color{#d71b3b}{🚀 About}$
 
 Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience.
 
 
-## $\color{orange}{📝 Features}$
+## $\color{#e8d71e}{📝 Features}$
 
 🔍 Effortless Note-taking: Quickly jot down your thoughts, ideas, to-do lists, and more with our intuitive and user-friendly interface.
 
@@ -14,7 +14,7 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
 
 
-## $\color{yellow}{Technologies}$
+## $\color{#16acea}{Technologies}$
 
 🔧 Kotlin
 <br>
