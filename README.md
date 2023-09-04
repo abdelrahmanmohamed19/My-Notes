@@ -1,13 +1,13 @@
 # Notes - Android App <img height="40" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" />
 
-## $\color{blue}{About}$
+<h2 style="color: #3498db;">About</h2>
 
 The currency conversion app aims to provide users with real-time and accurate currency
 conversion rates. It will support a wide range of currencies and offer a user-friendly interface.
 The app will be developed for multiple platforms, including web, Android ,and iOS.
 
 
-## $\color{yellow}{Features}$
+<h2 style="color: #2ecc71;">Features</h2>
 
 
 📝 Effortless Note-taking: Quickly jot down your thoughts, ideas, to-do lists, and more with our intuitive and user-friendly interface.
@@ -17,8 +17,8 @@ The app will be developed for multiple platforms, including web, Android ,and iO
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
 
 
+<h2 style="color: #e74c3c;">Used Technologies</h2>
 
-## $\color{green}{Used Technologies:}$
 ✅Kotlin
 <br>
 ✅MVVM
