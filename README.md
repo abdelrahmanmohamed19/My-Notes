@@ -32,17 +32,9 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 
 
 ## $\color{#4203c9}{📷Screenshots}$
-[<img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/9606d77d-e174-475f-96f2-2fee21d1fb37" align="left"
-width="200"
-    hspace="10" vspace="10">]
-    
-[<img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/f7337053-42d3-495f-ae7e-4b778b540755" align="center"
-width="200"
-    hspace="10" vspace="10">]
-
-[<img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/5d11a7b1-dc5c-45d9-8c5f-20f4f59ed192" align="center"
-width="200"
-    hspace="10" vspace="10">]
-    [<img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/7b3d4a71-bec1-4428-8fa2-7d8ff7f26ed7" align="right"
-width="200"
-    hspace="10" vspace="10">]
+<div style="display: flex; justify-content: center;">
+  <img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/9606d77d-e174-475f-96f2-2fee21d1fb37" width="200" hspace="10" vspace="10">
+  <img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/f7337053-42d3-495f-ae7e-4b778b540755" width="200" hspace="10" vspace="10">
+  <img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/5d11a7b1-dc5c-45d9-8c5f-20f4f59ed192" width="200" hspace="10" vspace="10">
+  <img src="https://github.com/abdelrahmanmohamed19/Notes/assets/61879243/7b3d4a71-bec1-4428-8fa2-7d8ff7f26ed7" width="200" hspace="10" vspace="10">
+</div>
