@@ -30,7 +30,7 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 <br>
 📚 Flows
 
-## $\color{#4203c9}{Screenshots}$
+## $\color{#4203c9}{📷Screenshots}$
 
 [<img src="/screenShots/convert.jpg" align="left"
 width="200"
