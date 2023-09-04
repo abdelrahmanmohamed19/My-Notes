@@ -16,16 +16,16 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 
 ## $\color{#f1c40f}{🛠️ Technologies}$
 
-✅Kotlin
+🔧 Kotlin
 <br>
-✅MVVM
+🔧 MVVM
 <br>
-✅Jetpack Compose
+🔧 Jetpack Compose
 <br>
-✅Dagger-Hilt
+🔧 Dagger-Hilt
 <br>
-✅Room Database
+🔧 Room Database
 <br>
-✅Coroutines
+🔧 Coroutines
 <br>
-✅Flows
+🔧 Flows
