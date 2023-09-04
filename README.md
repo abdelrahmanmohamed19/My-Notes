@@ -14,18 +14,18 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
 
 
-## $\color{#16acea}{⚙️ Technologies}$
+## $\color{#16acea}{💻 Technologies}$
 
-🔧 Kotlin
+📚 Kotlin
 <br>
-🔧 MVVM
+📚 MVVM
 <br>
-🔧 Jetpack Compose
+📚 Jetpack Compose
 <br>
-🔧 Dagger-Hilt
+📚 Dagger-Hilt
 <br>
-🔧 Room Database
+📚 Room Database
 <br>
-🔧 Coroutines
+📚 Coroutines
 <br>
-🔧 Flows
+📚 Flows
