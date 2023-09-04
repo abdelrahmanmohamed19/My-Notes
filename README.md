@@ -1,4 +1,4 @@
-# $\color{#3DDC84}{Notes App}$  <img height="40" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" />
+# $\color{#3DDC84}{Notes  App}$  <img height="40" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" />
 
 ## $\color{#d71b3b}{🚀 About}$
 
