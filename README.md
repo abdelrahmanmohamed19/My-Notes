@@ -5,7 +5,7 @@
 Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience.
 
 
-## $\color{#e8d71e}{📝 Features}$
+## $\color{#e8d71e}{💡 Features}$
 
 🔍 Effortless Note-taking: Quickly jot down your thoughts, ideas, to-do lists, and more with our intuitive and user-friendly interface.
 
