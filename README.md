@@ -2,7 +2,7 @@
 
 ## $\color{#3498db}{About}$
 
-Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience."
+Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience.
 
 
 ## $\color{#e74c3c}{Features}$
