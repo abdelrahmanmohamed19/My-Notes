@@ -20,9 +20,15 @@ The app will be developed for multiple platforms, including web, Android ,and iO
 
 ## $\color{green}{Used Technologies:}$
 ✅Kotlin
+<br>
 ✅MVVM
+<br>
 ✅Jetpack Compose
+<br>
 ✅Dagger-Hilt
+<br>
 ✅Room Database
+<br>
 ✅Coroutines
+<br>
 ✅Flows
