@@ -16,7 +16,7 @@ The app will be developed for multiple platforms, including web, Android ,and iO
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
 
 
-## $\color{#2ecc71}{Used Technologies}$
+## $\color{#2ecc71}{Technologies}$
 
 ✅Kotlin
 <br>
