@@ -14,7 +14,7 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
 
 
-## $\color{#f1c40f}<span>🔧</span>{ Technologies}$
+## $\color{#f1c40f}{Technologies}$
 
 🔧 Kotlin
 <br>
