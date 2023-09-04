@@ -6,6 +6,7 @@ The currency conversion app aims to provide users with real-time and accurate cu
 conversion rates. It will support a wide range of currencies and offer a user-friendly interface.
 The app will be developed for multiple platforms, including web, Android ,and iOS.
 
+
 ## $\color{#e74c3c}{Features}$
 
 📝 Effortless Note-taking: Quickly jot down your thoughts, ideas, to-do lists, and more with our intuitive and user-friendly interface.
@@ -13,6 +14,7 @@ The app will be developed for multiple platforms, including web, Android ,and iO
 🔍 Powerful Search: Find your notes in an instant with our robust search feature. Never lose track of important information again.
 
 📅 Organize Your Life: Categorize your notes into folders, tags, or labels. Customize your organization to fit your unique needs.
+
 
 ## $\color{#2ecc71}{Used Technologies}$
 
