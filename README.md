@@ -29,3 +29,20 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 📚 Coroutines
 <br>
 📚 Flows
+
+## $\color{#4203c9}{Screenshots}$
+
+[<img src="/screenShots/convert.jpg" align="left"
+width="200"
+    hspace="10" vspace="10">](/screenShots/convert.jpg)
+    
+[<img src="/screenShots/compare.jpg" align="center"
+width="200"
+    hspace="10" vspace="10">](/screenShots/compare.jpg)
+
+[<img src="/screenShots/favorite.jpg" align="left"
+width="200"
+    hspace="10" vspace="10">](/screenShots/favorite.jpg)
+    [<img src="/screenShots/dialog.jpg" align="center"
+width="200"
+    hspace="10" vspace="10">](/screenShots/dialog.jpg)
