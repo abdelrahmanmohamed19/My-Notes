@@ -17,14 +17,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,6 +53,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -61,15 +67,18 @@ import com.example.notes.db.Notes
 import com.example.notes.ui.theme.NotesTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import androidx.compose.runtime.LaunchedEffect as LaunchedEffect1
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel by viewModels<MainViewModel> ()
+    private val viewModel by viewModels<MainViewModel> ()
 
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -83,7 +92,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 
 
 @Composable
@@ -110,53 +118,53 @@ fun Navigation(navController : NavHostController ,viewModel: MainViewModel) {
 @Composable
 fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
     var search by remember { mutableStateOf(TextFieldValue()) }
-    var list by remember{ mutableStateOf(emptyList<Notes>()) }
     val colors = listOf(R.color.first,R.color.second,R.color.third,R.color.fourth,R.color.fifth,R.color.sixth)
     val scope = rememberCoroutineScope()
-    Scaffold(floatingActionButton = { FloatingButton(navController = navController)},topBar = { AppTobBar(viewModel)}) {
+    if (search.text.isEmpty()) {
+        LaunchedEffect1(key1 = true){
+            scope.launch{
+                viewModel.getAllNotes()
+            }
+        }
+    }
+    Scaffold(floatingActionButton = { FloatingButton(navController = navController)},topBar = { AppTobBar(viewModel)}) { it ->
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+            .background(Color.Black)
+            .fillMaxSize()
+            .padding(it)) {
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
-        .background(colorResource(id = R.color.main))
-        .fillMaxSize()
-        .padding(it)) {
-
-        TextField(value = search, onValueChange = {search = it}, placeholder = { Text(text = "Find your Note")}, modifier = Modifier
+        TextField(value = search, onValueChange = {search = it}, placeholder = { Text(text = "find your note")}, modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(12.dp)
+            .clip(RoundedCornerShape(16.dp)),
             colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = Color.Black,
+                focusedIndicatorColor = Color.White,
                 unfocusedIndicatorColor = colorResource(id = R.color.main),
-                cursorColor = Color.Black,
-                containerColor = Color.White
+                cursorColor = Color.White,
+                containerColor = colorResource(id = R.color.main)
             ))
 
         LazyVerticalGrid(columns = GridCells.Fixed(2)){
-
-            if (search.text.isEmpty()) {
-               list = viewModel.listMain.value
-            }
-
-            else if (search.text.isNotEmpty()) {
-
+            if (search.text.isNotEmpty()) {
                 scope.launch {
-
-                    list = viewModel.getNote(search.text).value
-
+                    viewModel.getNote(search.text)
+                    }
                 }
-            }
-            itemsIndexed(list) {index ,item ->
+
+            itemsIndexed(viewModel.notesList) {index ,item ->
                 val color = colors[index % colors.size]
                 Box(modifier = Modifier
                     .width(100.dp)
-                    .height(150.dp)
+                    .height(100.dp)
                     .padding(12.dp)
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(RoundedCornerShape(16.dp))
                     .clickable { navController.navigate("details/${item.id}/${item.title}/${item.content}") }){
-                    Column(modifier = Modifier
-                        .fillMaxSize()
-                        .background(colorResource(color))) {
-                        Text(text = item.title, fontSize = 25.sp,  color = Color.Black, fontWeight = FontWeight.Bold, modifier = Modifier.padding(4.dp))
-                        Text(text = item.content, fontSize = 15.sp, color = Color.Black , modifier = Modifier.padding(6.dp))
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(colorResource(color))) {
+                        Text(text = item.title.toUpperCase(), fontSize = 35.sp,  color = Color.White, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 4.dp), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(text = item.date, fontSize = 10.sp, color = Color.DarkGray)
                     }
                 }
                 }
@@ -165,28 +173,61 @@ fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
     }
 }
 
+
 @Composable
 fun FloatingButton(navController: NavHostController){
-    Button(onClick = {navController.navigate("add")}, colors = ButtonDefaults.buttonColors(Color.Black)) {
+    Button(onClick = {navController.navigate("add")}, colors = ButtonDefaults.buttonColors(colorResource(id = R.color.main))) {
         Text(text = "+", color = Color.White, fontSize = 25.sp)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTobBar(viewModel: MainViewModel) {
+fun AppTobBar(viewModel: MainViewModel ) {
     val scope = rememberCoroutineScope()
+    var isMenuExpanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    TopAppBar(title = { Text(text = "Notes", fontSize = 25.sp, color = Color.White, fontWeight = FontWeight.Bold) },colors = TopAppBarDefaults.smallTopAppBarColors(colorResource(id = R.color.main)),
+    TopAppBar(title = { Text(text = "Notes", fontSize = 25.sp, color = Color.White, fontWeight = FontWeight.Bold) },colors = TopAppBarDefaults.smallTopAppBarColors(Color.Black),
         actions = {
+            Box{
+                IconButton(onClick = {isMenuExpanded = !isMenuExpanded})
+                {
+                    Icon(imageVector = Icons.Filled.List, contentDescription = "", tint = Color.White)
+                }
+                DropdownMenu(
+                    expanded = isMenuExpanded,
+                    onDismissRequest = { isMenuExpanded = false },
+                    modifier = Modifier
+                        .wrapContentSize(Alignment.TopEnd)
+                        .background(Color.DarkGray)
+                        .padding(end = 12.dp)
+                ){
+                    DropdownMenuItem(
+                        text = { Text(text = "filter in ASC order") },
+                        onClick = {scope.launch {
+                            viewModel.getAllNotesASC()
+                            isMenuExpanded = false
+                        }}
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "filter by Date") },
+                        onClick = {scope.launch {
+                            viewModel.getAllNotesDateASC()
+                            isMenuExpanded = false
+                        }}
+                    )
+                }
+            }
+
             IconButton(onClick = {
                 scope.launch {
                     viewModel.clear()
                     Toast.makeText(context,"your notes list is cleared",Toast.LENGTH_SHORT).show()
                 } }) {
-                Icon(imageVector = Icons.Filled.Delete, contentDescription = "")
+                Icon(imageVector = Icons.Filled.Delete, contentDescription = "", tint = Color.White)
             }
         })
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -199,13 +240,16 @@ fun DetailsScreen(
     viewModel: MainViewModel
 ) {
     val scope = rememberCoroutineScope()
+    val currentDate = remember {Date()}
+    val dateFormat = SimpleDateFormat("M/d/yyyy", Locale.US)
+    val formattedDate = dateFormat.format(currentDate)
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(colorResource(id = R.color.main))) {
+        .background(Color.Black)) {
         var title by remember { mutableStateOf(noteTitle) }
         var content by remember { mutableStateOf(noteContent) }
-        TextField(value = title, onValueChange = { title = it }, placeholder = { Text(text = "Note Title",fontWeight = FontWeight.Bold, fontSize = 25.sp, color = Color.White)}, modifier = Modifier
+        TextField(value = title, onValueChange = { title = it }, placeholder = { Text(text = "Note Title".toUpperCase(),fontWeight = FontWeight.Bold, fontSize = 25.sp, color = Color.White)}, modifier = Modifier
             .fillMaxWidth()
             .padding(top = 24.dp, start = 12.dp, end = 12.dp),
             textStyle = TextStyle(fontSize = 25.sp, color = Color.White,fontWeight = FontWeight.Bold),
@@ -213,25 +257,25 @@ fun DetailsScreen(
                 focusedIndicatorColor = Color.White,
                 unfocusedIndicatorColor = Color.Black,
                 cursorColor = Color.White,
-                containerColor = colorResource(id = R.color.main)
+                containerColor = Color.Black
             ))
         TextField(value = content, onValueChange = { content = it }, placeholder = { Text(text = "Enter your Note Here",fontSize = 20.sp, color = Color.White)}, modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.80f)
+            .fillMaxHeight(0.90f)
             .padding(horizontal = 12.dp),
             textStyle = TextStyle(fontSize = 20.sp, color = Color.White),
             colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor =  colorResource(id = R.color.main),
-                unfocusedIndicatorColor = colorResource(id = R.color.main),
+                focusedIndicatorColor =  Color.Black,
+                unfocusedIndicatorColor = Color.Black,
                 cursorColor = Color.White,
-                containerColor = colorResource(id = R.color.main)
+                containerColor = Color.Black
             ))
 
         Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
             Button(onClick = {
                 if (title.isNotEmpty() && content.isNotEmpty()){
                     scope.launch {
-                        viewModel.updateNote(Notes(id = id ,title = title , content = content))
+                        viewModel.updateNote(Notes(id = id ,title = title.toUpperCase(), content = content , date = formattedDate.toString()))
                         Toast.makeText(context, "your Note is Updated", Toast.LENGTH_SHORT).show()
                         navController.navigate("home")
                     }
@@ -244,7 +288,7 @@ fun DetailsScreen(
             }
             Button(onClick = {
                 scope.launch {
-                    viewModel.deleteNote(Notes(id = id ,title = title , content = content))
+                    viewModel.deleteNote(Notes(id = id ,title = title.toUpperCase() , content = content , date = formattedDate.toString()))
                     Toast.makeText(context, "your Note is Deleted", Toast.LENGTH_SHORT).show()
                     navController.navigate("home")
                 }
@@ -262,14 +306,17 @@ fun DetailsScreen(
 @Composable
 fun AddNotesScreen(navController: NavHostController, viewModel: MainViewModel) {
     val scope = rememberCoroutineScope()
+    val currentDate = remember {Date()}
+    val dateFormat = SimpleDateFormat("M/d/yyyy", Locale.US)
+    val formattedDate = dateFormat.format(currentDate)
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(colorResource(id = R.color.main))
+        .background(Color.Black)
         .padding(top = 24.dp)) {
             var title by remember { mutableStateOf(TextFieldValue()) }
             var content by remember { mutableStateOf(TextFieldValue()) }
-            TextField(value = title, onValueChange = { title = it }, placeholder = { Text(text = "Note Title",fontWeight = FontWeight.Bold, fontSize = 25.sp, color = Color.White)}, modifier = Modifier
+            TextField(value = title, onValueChange = { title = it }, placeholder = { Text(text = "Note Title".toUpperCase(),fontWeight = FontWeight.Bold, fontSize = 25.sp, color = Color.White)}, modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
                 textStyle = TextStyle(fontSize = 25.sp, color = Color.White,fontWeight = FontWeight.Bold),
@@ -277,23 +324,23 @@ fun AddNotesScreen(navController: NavHostController, viewModel: MainViewModel) {
                     focusedIndicatorColor = Color.White,
                     unfocusedIndicatorColor = Color.Black,
                     cursorColor = Color.White,
-                    containerColor = colorResource(id = R.color.main)
+                    containerColor = Color.Black
                 ))
             TextField(value = content, onValueChange = { content = it }, placeholder = { Text(text = "Enter your Note Here",fontSize = 20.sp, color = Color.White)}, modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.80f)
+                .fillMaxHeight(0.90f)
                 .padding(horizontal = 8.dp),
                 textStyle = TextStyle(fontSize = 20.sp, color = Color.White),
                 colors = TextFieldDefaults.textFieldColors(
-                    focusedIndicatorColor =  colorResource(id = R.color.main),
-                    unfocusedIndicatorColor = colorResource(id = R.color.main),
+                    focusedIndicatorColor = Color.Black,
+                    unfocusedIndicatorColor =Color.Black,
                     cursorColor = Color.White,
-                    containerColor = colorResource(id = R.color.main)
+                    containerColor = Color.Black
                 ))
             Button(onClick = {
                 if(title.text.isNotEmpty() && content.text.isNotEmpty()){
                     scope.launch {
-                        viewModel.insertNote(Notes(title = title.text , content = content.text))
+                        viewModel.insertNote(Notes(title = title.text.toUpperCase() , content = content.text , date = formattedDate.toString()))
                         Toast.makeText(context, "your Note is Added", Toast.LENGTH_SHORT).show()
                         navController.navigate("home") }
                     }
