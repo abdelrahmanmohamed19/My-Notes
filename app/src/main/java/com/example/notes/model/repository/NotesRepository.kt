@@ -1,9 +1,9 @@
-package com.example.notes
+package com.example.notes.model.repository
 
-import com.example.notes.db.Notes
+import com.example.notes.model.local.Notes
 import kotlinx.coroutines.flow.Flow
 
-interface MainRepository {
+interface NotesRepository {
 
     suspend fun insertNote (note : Notes)
 

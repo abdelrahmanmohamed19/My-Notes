@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.ui
 
 import android.os.Bundle
 import android.widget.Toast
@@ -54,7 +54,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -63,8 +62,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.notes.db.Notes
+import com.example.notes.R
+import com.example.notes.model.local.Notes
 import com.example.notes.ui.theme.NotesTheme
+import com.example.notes.viewmodel.NotesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -76,7 +77,7 @@ import androidx.compose.runtime.LaunchedEffect as LaunchedEffect1
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<MainViewModel> ()
+    private val viewModel by viewModels<NotesViewModel> ()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,10 +96,10 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Navigation(navController : NavHostController ,viewModel: MainViewModel) {
+fun Navigation(navController : NavHostController ,viewModel: NotesViewModel) {
     NavHost(navController = navController , startDestination = "home") {
-        composable("home"){ HomeScreen(navController,viewModel)}
-        composable("add"){ AddNotesScreen(navController, viewModel)}
+        composable("home"){ HomeScreen(navController,viewModel) }
+        composable("add"){ AddNotesScreen(navController, viewModel) }
         composable("details/{id}/{title}/{content}", arguments = listOf(
             navArgument(name = "id"){type = NavType.IntType},
             navArgument(name = "title"){type = NavType.StringType},
@@ -116,9 +117,16 @@ fun Navigation(navController : NavHostController ,viewModel: MainViewModel) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
+fun HomeScreen(navController: NavHostController,viewModel: NotesViewModel){
     var search by remember { mutableStateOf(TextFieldValue()) }
-    val colors = listOf(R.color.first,R.color.second,R.color.third,R.color.fourth,R.color.fifth,R.color.sixth)
+    val colors = listOf(
+        R.color.first,
+        R.color.second,
+        R.color.third,
+        R.color.fourth,
+        R.color.fifth,
+        R.color.sixth
+    )
     val scope = rememberCoroutineScope()
     if (search.text.isEmpty()) {
         LaunchedEffect1(key1 = true){
@@ -127,7 +135,7 @@ fun HomeScreen(navController: NavHostController,viewModel: MainViewModel){
             }
         }
     }
-    Scaffold(floatingActionButton = { FloatingButton(navController = navController)},topBar = { AppTobBar(viewModel)}) { it ->
+    Scaffold(floatingActionButton = { FloatingButton(navController = navController) },topBar = { AppTobBar(viewModel) }) { it ->
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
             .background(Color.Black)
             .fillMaxSize()
@@ -183,7 +191,7 @@ fun FloatingButton(navController: NavHostController){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTobBar(viewModel: MainViewModel ) {
+fun AppTobBar(viewModel: NotesViewModel) {
     val scope = rememberCoroutineScope()
     var isMenuExpanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
@@ -237,7 +245,7 @@ fun DetailsScreen(
     id: Int,
     noteTitle: String,
     noteContent: String,
-    viewModel: MainViewModel
+    viewModel: NotesViewModel
 ) {
     val scope = rememberCoroutineScope()
     val currentDate = remember {Date()}
@@ -304,7 +312,7 @@ fun DetailsScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddNotesScreen(navController: NavHostController, viewModel: MainViewModel) {
+fun AddNotesScreen(navController: NavHostController, viewModel: NotesViewModel) {
     val scope = rememberCoroutineScope()
     val currentDate = remember {Date()}
     val dateFormat = SimpleDateFormat("M/d/yyyy", Locale.US)

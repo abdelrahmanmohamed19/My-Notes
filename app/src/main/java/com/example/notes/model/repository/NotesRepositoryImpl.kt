@@ -1,11 +1,11 @@
-package com.example.notes
+package com.example.notes.model.repository
 
-import com.example.notes.db.Notes
-import com.example.notes.db.NotesDao
+import com.example.notes.model.local.Notes
+import com.example.notes.model.local.NotesDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MainRepositoryImpl @Inject constructor(private val dao : NotesDao) : MainRepository {
+class NotesRepositoryImpl @Inject constructor(private val dao : NotesDao) : NotesRepository {
 
     override suspend fun insertNote (note : Notes) {
         dao.addNote(note)

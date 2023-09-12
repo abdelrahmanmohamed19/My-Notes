@@ -1,4 +1,4 @@
-package com.example.notes.db
+package com.example.notes.model.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
