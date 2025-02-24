@@ -33,7 +33,7 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 
 ## $\color{#4203c9}{📷Screenshots}$
 <div style="display: flex; justify-content: center;">
- <img src="https://github.com/abdelrahmanmohamed19/My-Notes/blob/master/Screenshots/1.jpeg" width="200" hspace="10" vspace="10">
+ <img src="https://github.com/abdelrahmanmohamed19/My-Notes/master/Screenshots/1.jpeg" width="200" hspace="10" vspace="10">
 <img src="https://github.com/abdelrahmanmohamed19/My-Notes/blob/master/Screenshots/2.jpeg" width="200" hspace="10" vspace="10">
  <img src="https://github.com/abdelrahmanmohamed19/My-Notes/blob/master/Screenshots/3.jpeg" width="200" hspace="10" vspace="10">
  <img src="https://github.com/abdelrahmanmohamed19/My-Notes/blob/master/Screenshots/4.jpeg" width="200" hspace="10" vspace="10">
