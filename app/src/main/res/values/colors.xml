@@ -7,11 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="first">#FD99FF</color>
-    <color name="second">#FF9E9E</color>
-    <color name="third">#91F48F</color>
-    <color name="fourth">#FFF599</color>
+    <color name="first">#FCA590</color>
+    <color name="second">#FFFFA0</color>
+    <color name="third">#CDEFF1</color>
+    <color name="fourth">#F8E7B4</color>
     <color name="fifth">#9EFFFF</color>
     <color name="sixth">#B69CFF</color>
-    <color name="main">#252525</color>
+    <color name="mainColor">#252525</color>
 </resources>

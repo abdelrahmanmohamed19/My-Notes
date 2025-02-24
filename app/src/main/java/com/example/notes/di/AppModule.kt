@@ -2,10 +2,10 @@ package com.example.notes.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.notes.model.repository.NotesRepository
-import com.example.notes.model.repository.NotesRepositoryImpl
-import com.example.notes.model.local.NotesDao
-import com.example.notes.model.local.NotesDatabase
+import com.example.notes.domain.repository.NotesRepository
+import com.example.notes.data.repository.NotesRepositoryImpl
+import com.example.notes.data.local.NotesDao
+import com.example.notes.data.local.NotesDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +21,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context : Context) : NotesDatabase =
-        Room.databaseBuilder(context, NotesDatabase::class.java,"myDatabase")
-            .allowMainThreadQueries().fallbackToDestructiveMigration().build()
+        Room.databaseBuilder(context, NotesDatabase::class.java,"Notes Database").build()
 
     @Provides
     @Singleton
