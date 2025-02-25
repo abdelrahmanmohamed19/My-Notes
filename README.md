@@ -18,7 +18,7 @@ My Notes app is designed to offer real-time note-taking and efficient organizati
 <br>
 📚 <b>Architecture:</b> $\color{#00A6ED}{Clean Architecture, MVVM}$ 
 <br>
-📚 <b>UI & Design:</b> $\color{#00A6ED}{Jetpack Compose}$
+📚 <b>UI & Design:</b> $\color{#00A6ED}{Jetpack  Compose}$
 <br>
 📚 <b>Dependency Injection:</b> $\color{#00A6ED}{Dagger-Hilt}$   
 📚 <b>Asynchronous & Reactive Programming:</b> $\color{#00A6ED}{Coroutines, Flows}$
