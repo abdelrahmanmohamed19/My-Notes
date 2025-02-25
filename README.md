@@ -2,7 +2,7 @@
 
 ## $\color{#d71b3b}{🚀 About}$
 
-Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience.
+My Notes app is designed to offer real-time note-taking and efficient organization, providing a user-friendly experience.
 
 
 ## $\color{#e8d71e}{💡 Features}$
@@ -14,22 +14,17 @@ Notes app is designed to offer real-time note-taking and efficient organization,
 
 ## $\color{#16acea}{💻 Technologies}$
 
-📚 Kotlin
+📚 <b>Programming Language:</b> $\color{#00A6ED}{Kotlin}$
 <br>
-📚 Clean Architecture
+📚 <b>Architecture:</b> $\color{#00A6ED}{Clean Architecture, MVVM}$ 
 <br>
-📚 MVVM
+📚 <b>UI & Design:</b> $\color{#00A6ED}{Jetpack Compose}$
 <br>
-📚 Jetpack Compose
+📚 <b>Dependency Injection:</b> $\color{#00A6ED}{Dagger-Hilt}$   
+📚 <b>Asynchronous & Reactive Programming:</b> $\color{#00A6ED}{Coroutines, Flows}$
 <br>
-📚 Dagger-Hilt
-<br>
-📚 Room Database
-<br>
-📚 Coroutines
-<br>
-📚 Flows
-
+📚 <b>Networking:</b> $\color{#00A6ED}{Retrofit, Rest APIs}$    
+📚 <b>Data Storage & Persistence:</b> $\color{#00A6ED}{Room Database}$ 
 
 ## $\color{#4203c9}{📷Screenshots}$
 <div style="display: flex; justify-content: center;">
